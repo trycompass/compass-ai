@@ -1,8 +1,8 @@
 ## Compass AI
 
-Compass is an AI-powered government services navigator designed to provide personalized guidance and support for navigating complex government processes.
+Compass is an AI-powered community services navigator designed to provide personalized guidance and support for navigating complex community services.
 
-Compass also has the ability to run web searches to find you government resources in real-time. This feature allows her to provide up-to-date information on government services, programs, and resources.
+Compass also has the ability to run web searches to find you community resources in real-time. This feature allows it to provide up-to-date information on community services, programs, and resources.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

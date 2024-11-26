@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen max-h-[100dvh] bg-gradient-to-b from-green-50 to-green-50">
       <Head>
-        <title>Compass - Navigate Government Services</title>
+        <title>Compass - Navigate Community Services</title>
       </Head>
       <header className="bg-white shadow-sm p-4 flex items-center justify-between">
         <div className="flex items-center">
@@ -182,11 +182,11 @@ export default function Home() {
             <ul className="space-y-4">
               <li>
                 <h3 className="font-semibold">What is Compass?</h3>
-                <p>Compass is an AI-powered government services navigator designed to provide personalized guidance and support for navigating complex government processes.</p>
+                <p>Compass is an AI-powered community services navigator designed to provide personalized guidance and support for navigating complex community services.</p>
               </li>
               <li>
                 <h3 className="font-semibold">How do I use Compass?</h3>
-                <p>Just chat like you're texting a trusted friend! Type whatever you're curious about in the box below. Compass also has the ability to run web searches to find you government resources in real-time!</p>
+                <p>Just chat like you're texting a trusted friend! Type whatever you're curious about in the box below. Compass also has the ability to run web searches to find you community resources in real-time!</p>
               </li>
               <li>
                 <h3 className="font-semibold">Is my conversation with Compass private?</h3>
