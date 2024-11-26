@@ -19,7 +19,13 @@ Key Approach:
 
 If you need to search the web for government resources, use the web_search tool. Your search queries should be as specific as possible; ask the user for additional details if needed. Before running a search, always ask the user for their location so you can search for government resources specifically in their state. When you search for government services, always provide the user with the most relevant and up-to-date information.
 
-Today's date is November 22, 2024.`;
+Always cite your sources using inline citations like this: [[1]](https://example.gov).
+
+Do not ask to run searches. Just do it. Don't narrate your thought process.
+
+Today's date is ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}.
+
+Always respond in markdown format.`;
 
 const WEB_SEARCH_TOOL = {
   name: "web_search",
@@ -37,7 +43,7 @@ const WEB_SEARCH_TOOL = {
 };
 
 export const config = {
-  maxDuration: 60,
+  maxDuration: 300,
 };
 
 export default async function handler(req, res) {
@@ -59,7 +65,7 @@ export default async function handler(req, res) {
 
     const response = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20241022",
-      max_tokens: 4000,
+      max_tokens: 8192,
       temperature: 1,
       system: SYSTEM_PROMPT,
       messages: apiMessages,
@@ -77,10 +83,14 @@ export default async function handler(req, res) {
       });
 
       const searchContent = searchResult.data.choices[0].message.content;
+      const citations = searchResult.data.citations || [];
+
+      // Format content to include citations
+      const contentWithCitations = `${searchContent}\n\nSources:\n${citations.join('\n')}`;
 
       const finalResponse = await anthropic.messages.create({
         model: "claude-3-5-sonnet-20241022",
-        max_tokens: 4000,
+        max_tokens: 8192,
         temperature: 1,
         system: SYSTEM_PROMPT,
         messages: [
@@ -95,7 +105,7 @@ export default async function handler(req, res) {
               {
                 type: "tool_result",
                 tool_use_id: toolUse.id,
-                content: searchContent
+                content: contentWithCitations
               }
             ]
           }

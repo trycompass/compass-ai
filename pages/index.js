@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
+import Markdown from 'react-markdown';
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -117,7 +118,37 @@ export default function Home() {
                     : 'bg-white text-gray-800 shadow-md'
                     }`}
                 >
-                  {message.content}
+                  {message.role === 'assistant' ? (
+                    <Markdown
+                      components={{
+                        a: ({ node, ...props }) => (
+                          <a {...props} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-600" />
+                        ),
+                        p: ({ node, ...props }) => (
+                          <p {...props} className="mb-4" />
+                        ),
+                        ul: ({ node, ...props }) => (
+                          <ul {...props} className="list-disc ml-6 mb-4" />
+                        ),
+                        ol: ({ node, ...props }) => (
+                          <ol {...props} className="list-decimal ml-6 mb-4" />
+                        ),
+                        li: ({ node, ...props }) => (
+                          <li {...props} className="mb-2" />
+                        ),
+                        em: ({ node, ...props }) => (
+                          <em {...props} className="italic" />
+                        ),
+                        strong: ({ node, ...props }) => (
+                          <strong {...props} className="font-bold" />
+                        )
+                      }}
+                    >
+                      {message.content}
+                    </Markdown>
+                  ) : (
+                    message.content
+                  )}
                 </div>
               </div>
             ))}
